@@ -27,6 +27,77 @@
 	<![endif]-->
 </head>
 
+<script type="text/javascript">
+			function getXhr(){
+                var xhr = null; 
+				if(window.XMLHttpRequest) // Firefox et autres
+				xhr = new XMLHttpRequest(); 
+				else if(window.ActiveXObject){ // Internet Explorer 
+				try {
+			            xhr = new ActiveXObject("Msxml2.XMLHTTP");
+			        } catch (e) {
+			            xhr = new ActiveXObject("Microsoft.XMLHTTP");
+			        }
+				}
+				else { // XMLHttpRequest non supporté par le navigateur 
+				   alert("Votre navigateur ne supporte pas les objets XMLHTTPRequest..."); 
+				   xhr = false; 
+				} 
+                return xhr;
+			}
+ 
+			/**
+			* Méthode qui sera appelée sur le click du bouton
+			*/
+			function set_s_theme(){
+				var xhr = getXhr();
+				// On défini ce qu'on va faire quand on aura la réponse
+				xhr.onreadystatechange = function(){
+					// On ne fait quelque chose que si on a tout reçu et que le serveur est ok
+					if(xhr.readyState == 4 && xhr.status == 200){
+						leselect = xhr.responseText;
+						// On se sert de innerHTML pour rajouter les options a la liste
+						document.getElementById('s_theme').innerHTML = leselect;
+					}
+				}
+ 
+				// Ici on va voir comment faire du post
+				xhr.open("POST","../../../script/s_theme.php",true);
+				// ne pas oublier ça pour le post
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				// ne pas oublier de poster les arguments
+				// ici, l'id de l'auteur
+				sel = document.getElementById('theme');
+				idtheme = sel.options[sel.selectedIndex].value;
+				console.log(idtheme);
+				xhr.send("idTheme="+idtheme);
+			}
+
+			function get_technos(id_techno){
+				console.log('get_technos : ' + id_techno);
+				var xhr = getXhr();
+				// On défini ce qu'on va faire quand on aura la réponse
+				xhr.onreadystatechange = function(){
+					// On ne fait quelque chose que si on a tout reçu et que le serveur est ok
+					if(xhr.readyState == 4 && xhr.status == 200){
+						leselect = xhr.responseText;
+						// On se sert de innerHTML pour rajouter les options a la liste
+						document.getElementById('technos').innerHTML = leselect;
+					}
+				}
+ 
+				// Ici on va voir comment faire du post
+				xhr.open("POST","scripts_php/get_technos.php",true);
+				// ne pas oublier ça pour le post
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				// ne pas oublier de poster les arguments
+				
+				xhr.send("id_techno="+id_techno);
+			}
+
+</script>
+
+
 <body>
 	<!-- Fixed navbar -->
 	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
@@ -67,22 +138,26 @@
 					<h1 class="page-title">Trouvez votre outil</h1>
 				</header>
 				
-				<div class="row">
-				  <div class="col-sm-2 zoom tuile" id="1" style="background-color: #F7CA18;">
-					DevOps
-				  </div>
-				  <div class="col-sm-2 zoom tuile" id="2" style="background-color: #F89406;">
-					FRONT
-				  </div>
-				  <div class="col-sm-2 zoom tuile" id="3" style="background-color: #FF5D40;">
-					BACK
-				  </div>
-				   <div class="col-sm-2 zoom tuile" id="4" style="background-color: #3D7599;">
-					DevOps
-				  </div>
-				  <div class="col-sm-2 zoom tuile" id="5" style="background-color: #ABB7B7;">
-					DevOps
-				  </div>
+				<div class="row" id="technos">
+
+					<div class="col-sm-2 zoom tuile" id="1" style="background-color: #F7CA18;" onclick='get_technos(this.id);'>
+						DevOps
+					</div>
+
+					<div class="col-sm-2 zoom tuile" id="2" style="background-color: #F89406;" onclick='get_technos(this.id);'>
+						FRONT
+					</div>
+
+					<div class="col-sm-2 zoom tuile" id="1" style="background-color: #FF5D40;" onclick='get_technos(this.id);'>
+						BACK
+					</div>
+
+					<!--<div class="col-sm-2 zoom tuile" id="4" style="background-color: #3D7599;">
+						DevOps
+					</div>
+					<div class="col-sm-2 zoom tuile" id="5" style="background-color: #ABB7B7;">
+						DevOps
+					</div>-->
 				  
 
 				<div>
