@@ -15,9 +15,16 @@ $res_technos = mysqli_query($link, $query_get_technos);
 
 
 while($row = mysqli_fetch_assoc($res_technos)){
-			echo "<div class='col-sm-2 zoom tuile' id='" . $row['IDTechnologie'] . "' style='background-color: #F7CA18;' onclick='get_technos(" . $row['IDTechnologie'] . ");'>";
-				echo $row['libelleTechno']; 
-			echo "</div>";
+			if($row['brancheFinale'] = "1") { // Branche finale
+				echo "<div class='col-sm-2 zoom tuile' id='" . $row['IDTechnologie'] . "' style='background-image: url('asset/images/logo_technos/bootstrap.png');' onclick='get_technos(" . $row['IDTechnologie'] . ");'>";
+					echo $row['libelleTechno'] . " : " . $row['brancheFinale']  ; 
+				echo "</div>";
+			}
+			else{
+				echo "<div class='col-sm-2 zoom tuile' id='" . $row['IDTechnologie'] . "' style='background-color: #F7CA18;' onclick='get_technos(" . $row['IDTechnologie'] . ");'>";
+					echo $row['libelleTechno'] . " : " . $row['brancheFinale']  ; 
+				echo "</div>";
+			}
 }
 
 ?>
