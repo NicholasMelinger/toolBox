@@ -19,6 +19,11 @@
 	<!-- Custom styles for our template -->
 	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
 	<link rel="stylesheet" href="assets/css/main.css">
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -95,6 +100,30 @@
 				xhr.send("id_techno="+id_techno);
 			}
 
+			function set_arbo(id_techno){
+				console.log('set_arbo : ' + id_techno);
+				var xhr = getXhr();
+				// On défini ce qu'on va faire quand on aura la réponse
+				xhr.onreadystatechange = function(){
+					// On ne fait quelque chose que si on a tout reçu et que le serveur est ok
+					if(xhr.readyState == 4 && xhr.status == 200){
+						leselect = xhr.responseText;
+
+						console.log("select : " + leselect);
+						// On se sert de innerHTML pour rajouter les options a la liste
+						document.getElementById('arbo').innerHTML = leselect;
+					}
+				}
+ 
+				// Ici on va voir comment faire du post
+				xhr.open("POST","scripts_php/get_arbo.php",true);
+				// ne pas oublier ça pour le post
+				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+				// ne pas oublier de poster les arguments
+				
+				xhr.send("id_techno="+id_techno);
+			}
+
 </script>
 
 
@@ -130,43 +159,61 @@
 			<li class="active">Trouver un outil</li>
 		</ol>
 
+		<!-- Div arborescence -->
+		<div id="arbo">
+
+		</div>
+
 		<div class="row">
+			<center>
+
+				<!-- Article main content -->
+				<article class="maincontent">
+					<header class="page-header">
+						<h1 class="page-title">Trouvez votre outil</h1>
+					</header>
+
+					<!--<a data-fancybox="gallery" href="bg_header.jpg">HOLA</a>
+
+					<a data-fancybox data-type="iframe" data-src="techno.php" href="javascript:;">
+						HOLA
+					</a>-->
+
+					<div class="row" id="technos">
+						<table>
+							<tr>
+								<td>
+									<div class="zoom tuile" id="1" style="background-color: #F7CA18;" onclick='get_technos(this.id);set_arbo(this.id);'>
+										DevOps
+									</div>
+								</td>
+								<td>
+									<div class="zoom tuile" id="2" style="background-color: #F89406;" onclick='get_technos(this.id); set_arbo(this.id);'>
+										FRONT
+									</div>
+								</td>
+								<td>
+									<div class="zoom tuile" id="1" style="background-color: #FF5D40;" onclick='get_technos(this.id); set_arbo(this.id);'>
+										BACK
+									</div>
+								</td>
+							</tr>
+						</table>
+
+					<div>
+
+					<!-- Formulaire debug -->
+					
+					<form action="scripts_php/get_arbo.php" method="POST">
+						<input type="text" name="id_techno">
+						<input type="submit" value="Envoyer le formulaire">
+					</form>
+					
+
+				</article>
+				<!-- /Article -->
 			
-			<!-- Article main content -->
-			<article class="col-sm-12 maincontent">
-				<header class="page-header">
-					<h1 class="page-title">Trouvez votre outil</h1>
-				</header>
-				
-				<div class="row" id="technos">
-
-					<div class="col-sm-2 zoom tuile" id="1" style="background-color: #F7CA18;" onclick='get_technos(this.id);'>
-						DevOps
-					</div>
-
-					<div class="col-sm-2 zoom tuile" id="2" style="background-color: #F89406;" onclick='get_technos(this.id);'>
-						FRONT
-					</div>
-
-					<div class="col-sm-2 zoom tuile" id="1" style="background-color: #FF5D40;" onclick='get_technos(this.id);'>
-						BACK
-					</div>
-
-					<!--<div class="col-sm-2 zoom tuile" id="4" style="background-color: #3D7599;">
-						DevOps
-					</div>
-					<div class="col-sm-2 zoom tuile" id="5" style="background-color: #ABB7B7;">
-						DevOps
-					</div>-->
-				  
-
-				<div>
-				
-			</article>
-			<!-- /Article -->
-			
-			
-
+			</center>
 
 		</div>
 	</div>	<!-- /container -->
@@ -186,7 +233,20 @@
 	<!-- Google Maps -->
 	<script src="https://maps.googleapis.com/maps/api/js?key=&amp;sensor=false&amp;extension=.js"></script> 
 	<script src="assets/js/google-map.js"></script>
-	
+
+	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.js"></script>	
+
+	<script>
+		$("[data-fancybox]").fancybox({
+			iframe : {
+				css : {
+					width : '500px',
+					height : '500px'
+				}
+			}
+		});
+	</script>
 
 </body>
 </html>
