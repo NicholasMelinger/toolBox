@@ -105,7 +105,7 @@
 
 			$techno = mysqli_fetch_assoc($res);
 
-			$html = $html . "<td><a href='http://localhost/Boiteaoutils/ToolBoxV2/trouver_outil.html' style='color:white;font-weight:bold;'><div class='col-sm-2 zoom tuile-arbo' style='background-color: " . $colors[rand(0, 5)] . ";'>";
+			$html = $html . "<td><a href='trouver_outil.html' style='color:white;font-weight:bold;'><div class='col-sm-2 zoom tuile-arbo' style='background-color: " . $colors[rand(0, 5)] . ";'>";
 			$html = $html . $techno['libelleTechno'];
 			$html = $html . "</div></a></td>";
 
