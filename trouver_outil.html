@@ -50,35 +50,12 @@
 				} 
                 return xhr;
 			}
- 
-			/**
-			* Méthode qui sera appelée sur le click du bouton
-			*/
-			function set_s_theme(){
-				var xhr = getXhr();
-				// On défini ce qu'on va faire quand on aura la réponse
-				xhr.onreadystatechange = function(){
-					// On ne fait quelque chose que si on a tout reçu et que le serveur est ok
-					if(xhr.readyState == 4 && xhr.status == 200){
-						leselect = xhr.responseText;
-						// On se sert de innerHTML pour rajouter les options a la liste
-						document.getElementById('s_theme').innerHTML = leselect;
-					}
-				}
- 
-				// Ici on va voir comment faire du post
-				xhr.open("POST","../../../script/s_theme.php",true);
-				// ne pas oublier ça pour le post
-				xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-				// ne pas oublier de poster les arguments
-				// ici, l'id de l'auteur
-				sel = document.getElementById('theme');
-				idtheme = sel.options[sel.selectedIndex].value;
-				console.log(idtheme);
-				xhr.send("idTheme="+idtheme);
-			}
 
 			function get_technos(id_techno){
+				$(document).ready(function(){
+							$("#technos").fadeOut(500);
+				});
+
 				console.log('get_technos : ' + id_techno);
 				var xhr = getXhr();
 				// On défini ce qu'on va faire quand on aura la réponse
@@ -88,6 +65,10 @@
 						leselect = xhr.responseText;
 						// On se sert de innerHTML pour rajouter les options a la liste
 						document.getElementById('technos').innerHTML = leselect;
+
+						$(document).ready(function(){
+							$("#technos").fadeIn(500);
+						});
 					}
 				}
  
@@ -101,6 +82,7 @@
 			}
 
 			function set_arbo(id_techno){
+				document.getElementById('effet').style.display='none';
 				console.log('set_arbo : ' + id_techno);
 				var xhr = getXhr();
 				// On défini ce qu'on va faire quand on aura la réponse
@@ -112,6 +94,10 @@
 						console.log("select : " + leselect);
 						// On se sert de innerHTML pour rajouter les options a la liste
 						document.getElementById('arbo').innerHTML = leselect;
+
+						$(document).ready(function(){
+							$("#effet").fadeIn(500);
+						});
 					}
 				}
  
@@ -159,20 +145,31 @@
 			<li class="active">Trouver un outil</li>
 		</ol>
 
-		<!-- Div arborescence -->
-		<div id="arbo">
 
+
+		
+		<div class="row">
+			<header class="page-header">
+				<h1 class="page-title">Trouvez votre outil</h1>
+			</header>
 		</div>
-
+		<div class="row">
+			<!-- Div arborescence -->
+			<div id="effet">
+				<table>
+					<tr id="arbo">
+						<div class='col-sm-2 zoom tuile-arbo' id='0'>
+								test
+						</div>
+					</tr>
+				</table>
+			</div>
+		</div>
+		</br>
 		<div class="row">
 			<center>
-
 				<!-- Article main content -->
 				<article class="maincontent">
-					<header class="page-header">
-						<h1 class="page-title">Trouvez votre outil</h1>
-					</header>
-
 					<!--<a data-fancybox="gallery" href="bg_header.jpg">HOLA</a>
 
 					<a data-fancybox data-type="iframe" data-src="techno.php" href="javascript:;">
@@ -183,18 +180,18 @@
 						<table>
 							<tr>
 								<td>
-									<div class="zoom tuile" id="1" style="background-color: #F7CA18;" onclick='get_technos(this.id);set_arbo(this.id);'>
-										DevOps
+									<div class="zoom tuile" id="11" style="background-color: #1C1C1C;" onclick='get_technos(this.id);set_arbo(this.id);'>
+										DEV OPS
 									</div>
 								</td>
 								<td>
-									<div class="zoom tuile" id="2" style="background-color: #F89406;" onclick='get_technos(this.id); set_arbo(this.id);'>
-										FRONT
+									<div class="zoom tuile" id="2" style="background-color: #0B3B2E;" onclick='get_technos(this.id); set_arbo(this.id);'>
+										FRONT END
 									</div>
 								</td>
 								<td>
-									<div class="zoom tuile" id="1" style="background-color: #FF5D40;" onclick='get_technos(this.id); set_arbo(this.id);'>
-										BACK
+									<div class="zoom tuile" id="1" style="background-color: #3B0B0B;" onclick='get_technos(this.id); set_arbo(this.id);'>
+										BACK END
 									</div>
 								</td>
 							</tr>
@@ -204,10 +201,10 @@
 
 					<!-- Formulaire debug -->
 					
-					<form action="scripts_php/get_arbo.php" method="POST">
+					<!--<form action="scripts_php/get_arbo.php" method="POST">
 						<input type="text" name="id_techno">
 						<input type="submit" value="Envoyer le formulaire">
-					</form>
+					</form>-->
 					
 
 				</article>
@@ -216,10 +213,56 @@
 			</center>
 
 		</div>
+		</br></br></br></br></br></br></br></br></br></br>
+		<div style="text-align: right;">
+			Une technologie ou une catégorie manquante ? Faites nous une suggestion <a href="#"><b>ici</b></a>.
+		</div>
 	</div>	<!-- /container -->
 
 
+	<footer id="footer" class="top-space">
 
+		<div class="footer1">
+			<div class="container">
+				<div class="row">
+					
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Contact</h3>
+						<div class="widget-body">
+							<p>07 86 XX XX XX<br>
+								<a href="mailto:#">devtoolbox@toolbox.fr</a><br>
+								<br>
+								234 Rue de la ToolBox, Développeurville, CP 00042
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-3 widget">
+						<h3 class="widget-title">Suivez nous</h3>
+						<div class="widget-body">
+							<p class="follow-me-icons">
+								<a href=""><i class="fa fa-twitter fa-2"></i></a>
+								<a href=""><i class="fa fa-dribbble fa-2"></i></a>
+								<a href=""><i class="fa fa-github fa-2"></i></a>
+								<a href=""><i class="fa fa-facebook fa-2"></i></a>
+							</p>	
+						</div>
+					</div>
+
+					<div class="col-md-6 widget">
+						<h3 class="widget-title">Du texte</h3>
+						<div class="widget-body">
+							<p>Ici on ne sait pas trop quoi écrire mais on veut le laisser car ça fait beau.</p>
+							</div>
+					</div>
+
+				</div> <!-- /row of widgets -->
+			</div>
+		</div>
+
+		
+
+	</footer>	
 
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->

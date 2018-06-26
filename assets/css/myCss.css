@@ -1,11 +1,4 @@
-.zoom {
-    padding: 50px;
-    background-color: green;
-    transition: transform .2s; /* Animation */
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-}
+
 
 .zoom:hover {
     transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
@@ -53,4 +46,122 @@ body {
 
 
    
+}
+
+
+.myImage {
+    zoom: 2;  //increase if you have very small images
+
+    display: block;
+    margin: auto;
+
+    height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+
+
+  justify-content: center;
+  align-items: center;
+
+
+}
+
+#container {
+  perspective: 30px;
+}
+
+#inner {
+  transition: transform 0.5s;
+  -webkit-transition: transform 0.5s;
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.2);
+}
+
+/*============================================================
+ * EXTRAS
+ *============================================================*/
+
+.demo-img {
+  /* Photo by David Marcu on Unsplash */
+  border: solid white 15px;
+  
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#container:hover .demo-overlay {
+  opacity: 1;
+}
+
+#container:hover {
+  cursor: pointer;
+}
+
+.demo-overlay {
+  width: 25em;
+  padding: 10em 0;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.4s;
+}
+
+.demo-overlay svg {
+  display: block;
+  margin: 0 auto;
+  fill: white;
+}
+
+.tuile-arbo{    width: auto;
+    margin: 10px;
+    padding: 10px;
+    display: inline ;
+    color:white;
+}
+
+.zoom {
+
+    transition: transform .2s; /* Animation */
+
+}
+
+.tuile{
+    font-size: 20px;
+    padding: 65px;
+    width: 200px;
+    height: 200px;
+    color:white;
+    text-align: center;
+    margin: 10px;
+}
+
+
+#footer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    padding-top:50px;
+}
+
+.technos{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform:translate(-50%, -50%);
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.finale{
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
 }
