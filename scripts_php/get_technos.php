@@ -10,7 +10,7 @@
 	$query_get_technos = "SELECT DISTINCT IDTechnologie, libelleTechno, brancheFinale, descLibelle, URL_image, URL_doc
 			  FROM technologie 
 			  WHERE idTechnologie IN 
-			  (SELECT IDTechnoFils FROM matricetechnos WHERE IDTechnoPere = " . $_POST['id_techno'] . ")";
+			  (SELECT IDTechnoFils FROM matricetechnos WHERE IDTechnoPere = " . $_POST['id_techno'] . ") order by libelleTechno";
 	$res_technos= mysqli_query($link, $query_get_technos);
 
 

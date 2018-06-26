@@ -82,7 +82,7 @@
 			$query = "SELECT DISTINCT IDTechnologie, libelleTechno, brancheFinale, descLibelle, URL_image, URL_doc
 			  FROM technologie 
 			  WHERE idTechnologie IN 
-			  (SELECT IDTechnoFils FROM matricetechnos WHERE IDTechnoPere = " . $techno_pere['IDTechnologie'] . ")";
+			  (SELECT IDTechnoFils FROM matricetechnos WHERE IDTechnoPere = " . $techno_pere['IDTechnologie'] . ") order by libelleTechno";
 			 //echo $query . "</br>";
 
 			$res= mysqli_query($link, $query);
