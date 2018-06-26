@@ -118,7 +118,7 @@
 
 	$j = count($tableau_html)-1; 
 	//echo "J : " . $j;
-//var_dump($tableau_html);
+	//var_dump($tableau_html);
 	for($j; $j>=0; $j--){
 		echo $tableau_html[$j];
 	}
